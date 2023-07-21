@@ -1,0 +1,167 @@
+RUNSPEC
+
+RPTRUNSP
+
+UNIFOUT
+
+TITLE
+'ECL'
+
+METRIC
+
+OIL
+WATER
+
+WELLDIMS
+--  nwmax ncwmax  ngmax nwgmax
+      100    100    100    100  /
+
+EQLDIMS
+      1   1*   1*   /
+
+DIMENS  
+   60 220 1 /
+
+START
+   1 'JAN' 1998     /
+
+TABDIMS
+   1  1  24 10  /
+
+GRID
+DX 
+13200*6.0 /
+
+DY 
+13200*3.0 /
+
+DZ 
+13200*0.6  /
+
+PORO
+13200*0.2 /
+
+PERMX
+13200*300 /
+
+PERMY
+13200*300 /
+
+PERMZ
+13200*300 /
+
+TOPS
+13200*100
+/
+
+INIT
+
+EDIT
+
+PROPS
+
+include
+pvt.inc 
+/
+REGIONS
+
+SATNUM
+13200*1 /
+
+SOLUTION
+
+PRESSURE
+13200*400 /
+
+SWAT
+13200*0.2034630216789383 /
+
+
+RPTRST
+BASIC=2 PRESSURE
+/ 
+
+SUMMARY
+
+RUNSUM
+NARROW
+
+WOPR
+'P1' 'P2' 'P3' 'P4'/
+--WWPR
+WWIR
+'I1'/
+WLPR
+'P1' 'P2' 'P3' 'P4' 
+/
+
+RPTONLY
+
+SEPARATE
+RPTSMRY
+   1 /
+
+SCHEDULE
+
+-- -----------------------------------------------------------------------
+TUNING    -- SETS SIMULATOR CONTROL PARAMETERS
+--
+-- TSINIT = Maximum length of NEXT TIMESTEP
+-- TSMAXZ = Maximum length of TIMESTEPS AFTER NEXT
+-- TSMINZ = Minimum length of all TIMESTEPS
+-- TSMCHP = Minimum cuttable TIMESTEP
+-- TSFMAX = Maximum TIMESTEP increase factor
+-- TSFMIN = Minimum TIMESTEP cutback factor
+-- TSFCNV = Factor by which TIMESTEP cut after CONV FAILURE
+-- TFDIFF = Maximum increase factor after CONV FAILURE
+-- THRUPT = Maximum throughput ratio
+-- TMAXWC = Maximum length of the next time step following a well modification
+--
+-- TRGTTE = Target Time truncation Error
+-- TRGCVN = Target Non-linear Conv. Error
+-- TRGMBE = Target Material Balance Error
+-- TRGLCV = Target Linear Conv. Error
+-- XXXTTE = Maximum Time truncation error
+-- XXXCVN = Maximum Non-linear Conv. Error
+-- XXXMBE = Maximum Material Balance Error
+-- XXXLCV = Maximum Linear Conv. Error
+-- XXXWFL = Maximum Well Flow Conv. Error
+-- TRGFIP = Target Fluid in Place Error for LGR runs
+--
+-- NEWTMX = Maximum Newton iterations per TIMESTEP
+-- NEWTMN = Minimum Newton iterations per TIMESTEP
+-- LITMAX = Maximum Linear iterations per Newton iteration
+-- LITMIN = Minimum Linear iterations per Newton iteration
+-- MXWSIT = Maximum iterations within wellflow calc.
+-- MXWPIT = Maximum iterations for THP/BHP controlled wells
+-- DDPLIM = Maximum DPRES at last Newton iteration
+-- DDSLIM = Maximum DSAT at last Newton iteration
+-- TRGDPR = Target Maximum DPRES in a TIMESTEP
+-- XXXDPR = Maximum Tolerable DPRES in a TIMESTEP
+--
+-- TSINIT TSMAXZ TSMINZ TSMCHP TSFMAX TSFMIN TSFCNV TSDIFF THRUPT TMAXWC
+      1      60      1*     1*     1*     1*     1*     1*   1*     1   /
+-- TRGTTE TRGCNV TRGMBE TRGLCV XXXTTE XXXCNV XXXMBE XXXLCV XXXWFL TRGFIP
+      1*     1*     1*     1*     1*     1*     1*     1*    1*     1*  /
+-- NEWTMX NEWTMN LITMAX LITMIN MXWSIT MXWPIT DDPLIM DDSLIM TRGDPR XXXDPR
+      1*     1*     50     1*     1*     1*     1*     1*    1*     1*  /
+-- -----------------------------------------------------------------------
+ 0.01  10.0  0.1  0.2   2 /
+                   /
+  20 1 50          /
+RPTSCHED 
+   'NEWTON=1' 'WELLS=2' 'FIP=3' 'CPU=2' 'WELSPECS'
+/
+
+--RPTRST 
+--   'BASIC=2'
+--/
+
+INCLUDE
+wells.inc /
+
+
+TSTEP
+100*10 /
+
+END

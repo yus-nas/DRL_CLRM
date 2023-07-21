@@ -1,0 +1,99 @@
+2021-09-18 16:46:26,119	INFO services.py:1272 -- View the Ray dashboard at [1m[32mhttp://127.0.0.1:8265[39m[22m
+2021-09-18 16:53:32,216	INFO worker.py:726 -- Connecting to existing Ray cluster at address: 10.19.5.10:8579
+2021-09-18 16:53:32,640	WARNING trial_runner.py:229 -- The maximum number of pending trials has been automatically set to the number of available cluster CPUs, which is high (154 CPUs/pending trials). If you're running an experiment with a large number of trials, this could lead to scheduling overhead. In this case, consider setting the `TUNE_MAX_PENDING_TRIALS_PG` environment variable to the desired maximum number of concurrent trials.
+2021-09-18 16:54:16,322	WARNING worker.py:1114 -- The actor or task with ID fffffffffffffffff1cbc085ad1cc9192e8c389a01000000 cannot be scheduled right now. It requires {CPU_group_2dfdfb138ea58f2014067074710bc433: 1.000000} for placement, but this node only has remaining {0.000000/20.000000 CPU, 164.558180 GiB/164.558180 GiB memory, 74.516317 GiB/74.516317 GiB object_store_memory, 1.000000/1.000000 CPU_group_43_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_47_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_49_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_50_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_44_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_41_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_55_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_40_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_39_2dfdfb138ea58f2014067074710bc433, 20.000000/20.000000 CPU_group_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_36_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_51_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_52_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_45_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_38_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_46_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_54_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_37_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_42_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_48_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 CPU_group_53_2dfdfb138ea58f2014067074710bc433, 1.000000/1.000000 node:10.19.5.10}
+. In total there are 0 pending tasks and 20 pending actors on this node. This is likely due to all cluster resources being claimed by actors. To resolve the issue, consider creating fewer actors or increase the resources available to this Ray cluster. You can ignore this message if this Ray cluster is expected to auto-scale or if you specified a runtime_env for this task or actor because it takes time to install.
+2021-09-22 16:45:16,050	ERROR trial_runner.py:748 -- Trial PPO_ReservoirEnv_a1429_00000: Error processing event.
+Traceback (most recent call last):
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/tune/trial_runner.py", line 718, in _process_trial
+    results = self.trial_executor.fetch_result(trial)
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/tune/ray_trial_executor.py", line 688, in fetch_result
+    result = ray.get(trial_future[0], timeout=DEFAULT_GET_TIMEOUT)
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/_private/client_mode_hook.py", line 62, in wrapper
+    return func(*args, **kwargs)
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/worker.py", line 1494, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(IndexError): [36mray::PPO.train_buffered()[39m (pid=21290, ip=10.19.5.30)
+  File "python/ray/_raylet.pyx", line 501, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 451, in ray._raylet.execute_task.function_executor
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/_private/function_manager.py", line 563, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/tune/trainable.py", line 173, in train_buffered
+    result = self.train()
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/rllib/agents/trainer.py", line 605, in train
+    raise e
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/rllib/agents/trainer.py", line 594, in train
+    result = Trainable.train(self)
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/tune/trainable.py", line 232, in train
+    result = self.step()
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/rllib/agents/trainer_template.py", line 173, in step
+    res = next(self.train_exec_impl)
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 756, in __next__
+    return next(self.built_iterator)
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 843, in apply_filter
+    for item in it:
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 843, in apply_filter
+    for item in it:
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  [Previous line repeated 1 more time]
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 876, in apply_flatten
+    for item in it:
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 828, in add_wait_hooks
+    item = next(it)
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  [Previous line repeated 1 more time]
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 471, in base_iterator
+    yield ray.get(futures, timeout=timeout)
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/_private/client_mode_hook.py", line 62, in wrapper
+    return func(*args, **kwargs)
+ray.exceptions.RayTaskError(IndexError): [36mray::RolloutWorker.par_iter_next()[39m (pid=26853, ip=10.19.5.54)
+  File "python/ray/_raylet.pyx", line 501, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 451, in ray._raylet.execute_task.function_executor
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/_private/function_manager.py", line 563, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/util/iter.py", line 1151, in par_iter_next
+    return next(self.local_it)
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/rllib/evaluation/rollout_worker.py", line 333, in gen_rollouts
+    yield self.sample()
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/rllib/evaluation/rollout_worker.py", line 726, in sample
+    batches = [self.input_reader.next()]
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/rllib/evaluation/sampler.py", line 99, in next
+    batches = [self.get_data()]
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/rllib/evaluation/sampler.py", line 226, in get_data
+    item = next(self.rollout_provider)
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/rllib/evaluation/sampler.py", line 599, in _env_runner
+    _process_observations(
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/rllib/evaluation/sampler.py", line 922, in _process_observations
+    resetted_obs: Dict[AgentID, EnvObsType] = base_env.try_reset(
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/rllib/env/base_env.py", line 368, in try_reset
+    return {_DUMMY_AGENT_ID: self.vector_env.reset_at(env_id)}
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/rllib/env/vector_env.py", line 161, in reset_at
+    return self.envs[index].reset()
+  File "/scratch/users/nyusuf/Research_projects/DRL_chan/reservoir_env.py", line 52, in reset
+    self.sim_input["realz"] = int(self.realz_train[self.sim_iter])
+IndexError: index 601 is out of bounds for axis 0 with size 601
+2021-09-22 16:46:16,622	WARNING ray_trial_executor.py:123 -- Skipping cleanup - trainable.stop did not return in time. Consider making `stop` a faster operation.
+2021-09-22 16:47:16,626	WARNING ray_trial_executor.py:123 -- Skipping cleanup - trainable.stop did not return in time. Consider making `stop` a faster operation.
+2021-09-22 16:48:16,630	WARNING ray_trial_executor.py:123 -- Skipping cleanup - trainable.stop did not return in time. Consider making `stop` a faster operation.
+2021-09-22 16:49:16,634	WARNING ray_trial_executor.py:123 -- Skipping cleanup - trainable.stop did not return in time. Consider making `stop` a faster operation.
+2021-09-22 16:50:16,638	WARNING ray_trial_executor.py:123 -- Skipping cleanup - trainable.stop did not return in time. Consider making `stop` a faster operation.
+Traceback (most recent call last):
+  File "train_drl_agent.py", line 25, in <module>
+    tune.run(
+  File "/home/groups/lou/miniconda3/envs/drl/lib/python3.8/site-packages/ray/tune/tune.py", line 543, in run
+    raise TuneError("Trials did not complete", incomplete_trials)
+ray.tune.error.TuneError: ('Trials did not complete', [PPO_ReservoirEnv_a1429_00000])
